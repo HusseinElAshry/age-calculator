@@ -160,7 +160,7 @@ const calcAge = ({dayInput,monthInput,yearInput}={})=>{
         let dayDifference=0, monthDifference=0, yearDifference=0;
         dayDifference = todayDate.getDate() - inputDate.getDate();
         if(dayDifference<0){
-            if(month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11){
+            if(nowDate.getMonth() == 2 || nowDate.getMonth() == 4 || nowDate.getMonth() == 6 || nowDate.getMonth() == 7 || nowDate.getMonth() == 9 || nowDate.getMonth() == 11){
                 dayDifference+=31;
             }else{
                 dayDifference+=30;
