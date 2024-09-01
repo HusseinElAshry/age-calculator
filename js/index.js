@@ -189,10 +189,14 @@ const calcAge = ({dayInput,monthInput,yearInput}={})=>{
     }
 }
 const displayResults = ({year,month,day}={})=>{
-    const spans = document.querySelectorAll('span[id]');
-    spans[0].innerHTML = year;
-    spans[1].innerHTML = month;
-    spans[2].innerHTML = day;    
+    const paragraphs = document.querySelectorAll('.calc-results p');
+    paragraphs[0].lastElementChild.innerHTML = year;    
+    paragraphs[1].lastElementChild.innerHTML = month;    
+    paragraphs[2].lastElementChild.innerHTML = day;    
+    paragraphs[0].lastChild.textContent =  year == 1 ?' year': ' years';    
+    paragraphs[1].lastChild.textContent =  month == 1 ?' month': ' months';    
+    paragraphs[2].lastChild.textContent =  day == 1 ?' day': ' days';    
+       
 }
 const setUpCombination = ({year,month,day}={})=>{
     year = Number(year);
