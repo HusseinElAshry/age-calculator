@@ -1,6 +1,7 @@
 const dayInput = document.getElementById('dayInput');
 const monthInput = document.getElementById('monthInput');
 const yearInput = document.getElementById('yearInput');
+const longMonthes = [1,3,5,7,8,10,12];
 const setError = ({errMessage, inputElement, elementId}={})=>{
     if(!document.getElementById(elementId)){
         const newElement = document.createElement('p');
@@ -160,8 +161,15 @@ const calcAge = ({dayInput,monthInput,yearInput}={})=>{
         let dayDifference=0, monthDifference=0, yearDifference=0;
         dayDifference = todayDate.getDate() - inputDate.getDate();
         if(dayDifference<0){
-            if(nowDate.getMonth() == 2 || nowDate.getMonth() == 4 || nowDate.getMonth() == 6 || nowDate.getMonth() == 7 || nowDate.getMonth() == 9 || nowDate.getMonth() == 11){
+            if(longMonthes.includes((nowDate.getMonth()+1)) ){
                 dayDifference+=31;
+            }else if(nowDate.getMonth() == 1){
+                if(nowDate.getFullYear()%4){
+                    dayDifference+=29;
+                }else{
+                    dayDifference+=28;
+                }
+                
             }else{
                 dayDifference+=30;
             }
@@ -190,7 +198,7 @@ const setUpCombination = ({year,month,day}={})=>{
     year = Number(year);
     month = Number(month);
     day = Number(day);
-    if(   (year % 4!=0 && month == 2 && day == 29 )  ||  (  (month == 2 || month == 4 || month == 6 || month == 9 || month == 11) && day == 31) || (month == 2 && day == 30)){
+    if(   (year % 4!=0 && month == 2 && day == 29 )  ||  ( !longMonthes.includes(month) && day == 31) || (month == 2 && day == 30)){
         setFormError('combinationError');
         return false;
     }return true;
@@ -219,6 +227,10 @@ const submitForm = (e)=>{
             });
             clearResults();
         }else{
+            removeError('yearInputError');
+            removeError('monthInputError');
+            removeError('dayInputError');
+            removeFormError('combinationError');
             displayResults({year,month,day});
         }
     }else{
