@@ -132,11 +132,16 @@ input:focus{
         margin-left: 0.25rem;
         margin-right:0.25rem;
     }
+    .calc-results{
+        font-size: 3.75rem;
+    }
 }
 @media screen and (max-width:475px) {
     .col-11{
         width: calc((11/12)*100%);
     }
-
+    .calc-results{
+        font-size: 3.25rem;
+    }
 }
 
